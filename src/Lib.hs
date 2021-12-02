@@ -33,7 +33,7 @@ aperture' :: Int -> [a] -> [[a]]
 aperture' n = map (take n) . tails
 
 takeLengthOf :: [a] -> [b] -> [b]
-takeLengthOf = zipWith (flip const)
+takeLengthOf = zipWith (const id)
 
 aperture :: Int -> [a] -> [[a]]
 aperture n xs = takeLengthOf (drop (n - 1) xs) (aperture' n xs)

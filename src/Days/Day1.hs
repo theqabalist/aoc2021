@@ -12,18 +12,18 @@ newtype Day1Input = Day1Input [Int]
 instance Parseable Day1Input where
   parse = Day1Input . fmap (read . unpack) . lines
 
-data ScanState = ScanState Int Int
+data Day1State = Day1State
+  { prev :: Int,
+    incs :: Int
+  }
   deriving (Show)
-
-incs :: ScanState -> Int
-incs (ScanState _ x) = x
 
 partOne :: Day1Input -> Int
 partOne (Day1Input nums) =
   incs $
     foldl'
-      (\(ScanState prev incs) elem -> ScanState elem (if elem > prev then incs + 1 else incs))
-      (ScanState (-1) (-1))
+      (\(Day1State prev incs) elem -> Day1State elem (if elem > prev then incs + 1 else incs))
+      (Day1State {prev = -1, incs = -1})
       nums
 
 partTwo :: Day1Input -> Int

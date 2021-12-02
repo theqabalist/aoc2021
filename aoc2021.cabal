@@ -27,13 +27,21 @@ library
   exposed-modules:
       Days
       Days.Day1
+      Days.Day2
+      Days.Day2.Movement
+      Days.Day2.Movement.Interp
+      Days.Day2.Movement.Interp2
+      Days.Day2.Position
       Lib
   other-modules:
       Paths_aoc2021
   hs-source-dirs:
       src
+  ghc-options: -O3 -threaded
   build-depends:
-      base >=4.7 && <5
+      attoparsec
+    , base >=4.7 && <5
+    , mtl
     , split
     , text
     , vector
@@ -45,7 +53,7 @@ executable aoc2021-exe
       Paths_aoc2021
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -O3 -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2021
     , base >=4.7 && <5
