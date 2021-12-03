@@ -32,6 +32,9 @@ library
       Days.Day2.Movement.Interp
       Days.Day2.Movement.Interp2
       Days.Day2.Position
+      Days.Day3
+      Days.Day3.Numeric
+      Days.Day3.RateCollector
       Lib
   other-modules:
       Paths_aoc2021
