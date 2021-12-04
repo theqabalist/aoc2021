@@ -26,13 +26,13 @@ library:
   source-dirs: src
   ghc-options:
   - -O3
-  - -threaded
   dependencies:
   - attoparsec
   - text
   - split
   - vector
   - mtl
+  - containers
 
 executables:
   aoc2021-exe:
