@@ -33,6 +33,7 @@ library:
   - vector
   - mtl
   - containers
+  - unordered-containers
 
 executables:
   aoc2021-exe:

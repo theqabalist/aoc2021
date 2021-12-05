@@ -9,12 +9,10 @@ import Data.Attoparsec.Text (Parser, Result, decimal, digit, endOfInput, endOfLi
 import Data.Char (isSpace)
 import Data.Either (fromRight)
 import Data.Text (Text, pack)
+import Days.Common.Parsing (int)
 import Days.Day2.Position (Position (Position), x, z)
 
 data Movement = Forward Int | Up Int | Down Int | Stay
-
-int :: Parser Int
-int = read <$> some digit
 
 intInstruction :: Text -> Parser Int
 intInstruction instruction = string instruction *> skip isSpace *> int <* endOfLine
