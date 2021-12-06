@@ -40,6 +40,7 @@ library
       Days.Day4.BingoBoard
       Days.Day5
       Days.Day5.Segment
+      Days.Day6
       Lib
   other-modules:
       Paths_aoc2021

@@ -14,20 +14,20 @@ data Day4Input = Day4Input [Int] [BingoBoard]
 instance Parseable Day4Input where
   parse input =
     let split = filter (/= "") $ lines input
-        calls = (read . unpack) <$> (splitOn "," $ head split) :: [Int]
-        boards = (parse . unlines) <$> (chunksOf 5 (strip <$> tail split))
+        calls = read . unpack <$> splitOn "," (head split) :: [Int]
+        boards = parse . unlines <$> chunksOf 5 (strip <$> tail split)
      in Day4Input calls boards
 
 partOne :: Day4Input -> Int
 partOne (Day4Input calls boards) =
-  let (foundCall, foundBoard : []) =
+  let (foundCall, [foundBoard]) =
         foldl'
           ( \(lastCall, boards) c ->
-              if (length boards == 1)
+              if length boards == 1
                 then (lastCall, boards)
                 else
                   ( let called = call c <$> boards
-                     in case (find bingo called) of
+                     in case find bingo called of
                           Just board -> (c, [board])
                           Nothing -> (c, called)
                   )
@@ -38,13 +38,13 @@ partOne (Day4Input calls boards) =
 
 partTwo :: Day4Input -> Int
 partTwo (Day4Input calls boards) =
-  let (foundCall, foundBoard : []) =
+  let (foundCall, [foundBoard]) =
         foldl'
           ( \(lastCall, boards) c ->
-              if (length boards == 1 && bingo (head boards))
+              if length boards == 1 && bingo (head boards)
                 then (lastCall, boards)
                 else
-                  ( let called = call c <$> filter (\x -> not (bingo x)) boards
+                  ( let called = call c <$> filter (not . bingo) boards
                      in (c, called)
                   )
           )

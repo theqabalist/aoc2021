@@ -21,8 +21,8 @@ tallyCollisions = tallyCollisions' empty
   where
     tallyCollisions' !collected (first : rest) =
       let inters = filter (intersects first) rest
-          newCollisions = (unions $ map (collide first) inters)
-          more = (newCollisions `seq` (collected `union` newCollisions))
+          newCollisions = unions $ map (collide first) inters
+          more = collected `union` newCollisions
        in tallyCollisions' more rest
     tallyCollisions' collected [] = collected
 
