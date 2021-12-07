@@ -41,6 +41,7 @@ library
       Days.Day5
       Days.Day5.Segment
       Days.Day6
+      Days.Day7
       Lib
   other-modules:
       Paths_aoc2021
