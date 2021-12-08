@@ -42,6 +42,10 @@ library
       Days.Day5.Segment
       Days.Day6
       Days.Day7
+      Days.Day8
+      Days.Day8.CharMapping
+      Days.Day8.Common
+      Days.Day8.Decode
       Lib
   other-modules:
       Paths_aoc2021
