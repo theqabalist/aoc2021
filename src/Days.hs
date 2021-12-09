@@ -3,7 +3,6 @@ module Days
   )
 where
 
--- import qualified Days.Day9 as D9
 -- import qualified Days.Day10 as D10
 -- import qualified Days.Day11 as D11
 -- import qualified Days.Day12 as D12
@@ -29,6 +28,7 @@ import qualified Days.Day5 as D5
 import qualified Days.Day6 as D6
 import qualified Days.Day7 as D7
 import qualified Days.Day8 as D8
+import qualified Days.Day9 as D9
 import Lib (dualTextAdapter, dualTextAdapter')
 
 days :: [Text -> Text]
@@ -40,8 +40,8 @@ days =
     dualTextAdapter' D5.partOne D5.partTwo,
     dualTextAdapter D6.partOne D6.partTwo,
     dualTextAdapter D7.partOne D7.partTwo,
-    dualTextAdapter D8.partOne D8.partTwo
-    -- dualTextAdapter D9.partOne D9.partTwo,
+    dualTextAdapter D8.partOne D8.partTwo,
+    dualTextAdapter D9.partOne D9.partTwo
     -- dualTextAdapter D10.partOne D10.partTwo,
     -- dualTextAdapter D11.partOne D11.partTwo,
     -- dualTextAdapter D12.partOne D12.partTwo,

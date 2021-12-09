@@ -6,6 +6,7 @@ import Control.Monad.Except (Except, runExcept)
 import Data.Either (fromRight)
 import Data.Text (Text)
 import Lib (Parseable (parse))
+import Prelude (Int, Show, (*))
 
 data Position = Position
   { x :: Int,

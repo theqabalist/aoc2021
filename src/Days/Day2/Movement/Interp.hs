@@ -2,8 +2,9 @@
 
 module Days.Day2.Movement.Interp where
 
-import Days.Day2.Movement
-import Days.Day2.Position
+import Days.Day2.Movement (Movement (..))
+import Days.Day2.Position (Position (Position, x, z))
+import Prelude ((+), (-))
 
 compile :: Movement -> Position -> Position
 compile (Forward units) p@Position {x} = p {x = x + units}

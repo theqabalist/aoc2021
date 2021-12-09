@@ -1,5 +1,4 @@
 {-# LANGUAGE BangPatterns #-}
-{-# LANGUAGE OverloadedStrings #-}
 
 module Days.Day5 where
 
@@ -9,6 +8,7 @@ import Data.HashSet (HashSet, empty, size, union, unions)
 import Data.Text (Text)
 import Days.Day5.Segment (Segment, collide, diagonal, horizontal, intersects, parseSegment, vertical)
 import Lib (Parseable (parse))
+import Prelude (Int, Show, filter, map, not, ($), (.), (<*))
 
 newtype Day5Input = Day5Input [Segment]
   deriving (Show)

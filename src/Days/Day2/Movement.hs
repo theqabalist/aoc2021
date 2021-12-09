@@ -1,4 +1,3 @@
-{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Days.Day2.Movement where
@@ -11,6 +10,7 @@ import Data.Either (fromRight)
 import Data.Text (Text, pack)
 import Days.Common.Parsing (int)
 import Days.Day2.Position (Position (Position), x, z)
+import Prelude (Either, Int, String, (*>), (<$>), (<*))
 
 data Movement = Forward Int | Up Int | Down Int | Stay
 
