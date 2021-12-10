@@ -28,6 +28,7 @@ library
       Days
       Days.Common.Parsing
       Days.Day1
+      Days.Day10
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp
