@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Days.Day1 (partOne, partTwo) where
 
 import Data.Foldable (foldl')

@@ -1,6 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TupleSections #-}
-
 module Days.Day6 where
 
 import Data.Map (Map, empty, insert, lookup, union)

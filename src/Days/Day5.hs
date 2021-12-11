@@ -1,5 +1,3 @@
-{-# LANGUAGE BangPatterns #-}
-
 module Days.Day5 where
 
 import Data.Attoparsec.Text (endOfInput, many', parseOnly)

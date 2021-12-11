@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Days.Day2 where
 
 import Control.Monad.Except (runExcept)

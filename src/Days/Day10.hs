@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Days.Day10 where
 
 import Data.List (find, foldl', sort)

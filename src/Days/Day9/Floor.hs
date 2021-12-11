@@ -6,44 +6,26 @@ import Data.Foldable (foldl')
 import qualified Data.HashSet as HS
 import Data.Map (Map, fromList, lookup, toList)
 import Data.Maybe (fromMaybe)
+import Days.Common.DigitGrid (DigitGrid (..), adjacentLocations, adjacentValues)
 import Debug.Trace (traceShow, traceShowId)
 import Prelude hiding (lookup)
 
-data Floor = Floor
-  { width :: Int,
-    height :: Int,
-    theMap :: Map (Int, Int) Int
-  }
-  deriving (Show)
-
-inbounds :: (Int, Int) -> Floor -> Bool
-inbounds (x, y) f | x < 0 || y < 0 = False
-inbounds (x, y) Floor {width} | x >= width = False
-inbounds (x, y) Floor {height} | y >= height = False
-inbounds _ _ = True
-
-adjacentLocations :: (Int, Int) -> Floor -> [(Int, Int)]
-adjacentLocations (x, y) floor = filter (`inbounds` floor) [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
-
-adjacentValues :: (Int, Int) -> Floor -> [Int]
-adjacentValues coord floor@Floor {theMap} =
-  fromMaybe (error $ "adjacencies to " <> show coord <> " are out of bounds of the map") $
-    traverse (`lookup` theMap) $ adjacentLocations coord floor
+type Floor = DigitGrid
 
 isLow :: (Int, Int) -> Floor -> Bool
-isLow coord floor@Floor {theMap} =
-  let asked = fromMaybe (error $ (show coord) <> " is out of bounds of the map") $ lookup coord theMap
+isLow coord floor@DigitGrid {theMap} =
+  let asked = fromMaybe (error $ show coord <> " is out of bounds of the map") $ lookup coord theMap
       adjacent = adjacentValues coord floor
    in all (> asked) adjacent
 
 lowCoords :: Floor -> [(Int, Int)]
-lowCoords floor@(Floor {theMap}) = foldl' (\acc (coord, v) -> acc ++ if isLow coord floor then [coord] else []) [] (toList theMap)
+lowCoords floor@DigitGrid {theMap} = foldl' (\acc (coord, v) -> acc ++ [coord | isLow coord floor]) [] (toList theMap)
 
 lowValues :: Floor -> [Int]
-lowValues floor@(Floor {theMap}) = foldl' (\acc (coord, v) -> acc ++ if isLow coord floor then [v] else []) [] (toList theMap)
+lowValues floor@DigitGrid {theMap} = foldl' (\acc (coord, v) -> acc ++ [v | isLow coord floor]) [] (toList theMap)
 
 valAt :: (Int, Int) -> Floor -> Int
-valAt coord (Floor {theMap}) = fromMaybe (error $ (show coord) <> " is out of bounds of the map") $ lookup coord theMap
+valAt coord DigitGrid {theMap} = fromMaybe (error $ show coord <> " is out of bounds of the map") $ lookup coord theMap
 
 newtype Basin = Basin [(Int, Int)]
   deriving (Eq, Show)
@@ -59,7 +41,7 @@ traceBasin :: (Int, Int) -> Floor -> Basin
 traceBasin fromLowPoint floor = Basin $ HS.toList $ traceBasin' [fromLowPoint] (HS.fromList []) floor
   where
     traceBasin' [] traced floor = traced
-    traceBasin' (coord : horizon) traced floor@(Floor {theMap}) =
+    traceBasin' (coord : horizon) traced floor@DigitGrid {theMap} =
       let adjacent = adjacentLocations coord floor
           noNines = filter ((< 9) . (`valAt` floor)) adjacent
           withoutVisited = filter (not . (`HS.member` traced)) noNines
@@ -67,13 +49,3 @@ traceBasin fromLowPoint floor = Basin $ HS.toList $ traceBasin' [fromLowPoint] (
 
 findBasins :: Floor -> [Basin]
 findBasins floor = (`traceBasin` floor) <$> lowCoords floor
-
-fromIntArrArr :: [[Int]] -> Floor
-fromIntArrArr input =
-  let height = length input
-      width = length (head input)
-      theMap = fromList $ do
-        row <- [0 .. (height - 1)]
-        column <- [0 .. (width - 1)]
-        pure ((column, row), input !! row !! column)
-   in Floor width height theMap

@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Days.Day3 where
 
 import Data.Char (intToDigit)

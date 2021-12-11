@@ -26,7 +26,12 @@ library:
   source-dirs: src
   ghc-options:
   - -O3
-  - -XNoImplicitPrelude
+  default-extensions:
+  - NoImplicitPrelude
+  - OverloadedStrings
+  - TupleSections
+  - BangPatterns
+  - NamedFieldPuns
   dependencies:
   - attoparsec
   - text
@@ -45,7 +50,12 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-    - -XNoImplicitPrelude
+    default-extensions:
+    - NoImplicitPrelude
+    - OverloadedStrings
+    - TupleSections
+    - BangPatterns
+    - NamedFieldPuns
     dependencies:
     - text
     - aoc2021

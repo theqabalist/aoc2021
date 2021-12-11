@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Days.Day7 where
 
 import Data.HashSet (HashSet, fromList, toList)

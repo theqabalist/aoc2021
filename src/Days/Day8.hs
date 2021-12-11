@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Days.Day8 where
 
 import Control.Monad.State (evalState)
