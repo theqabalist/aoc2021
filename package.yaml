@@ -32,6 +32,7 @@ library:
   - TupleSections
   - BangPatterns
   - NamedFieldPuns
+  - DeriveGeneric
   dependencies:
   - attoparsec
   - text
@@ -40,6 +41,7 @@ library:
   - mtl
   - containers
   - unordered-containers
+  - hashable
 
 executables:
   aoc2021-exe:

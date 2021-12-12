@@ -32,6 +32,9 @@ library
       Days.Day10
       Days.Day11
       Days.Day11.SquidGame
+      Days.Day12
+      Days.Day12.Cave
+      Days.Day12.CaveSystem
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp
@@ -63,11 +66,13 @@ library
       TupleSections
       BangPatterns
       NamedFieldPuns
+      DeriveGeneric
   ghc-options: -O3
   build-depends:
       attoparsec
     , base >=4.7 && <5
     , containers
+    , hashable
     , mtl
     , split
     , text
