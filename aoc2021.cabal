@@ -35,6 +35,10 @@ library
       Days.Day12
       Days.Day12.Cave
       Days.Day12.CaveSystem
+      Days.Day13
+      Days.Day13.CoordBag
+      Days.Day13.Day13Input
+      Days.Day13.Fold
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp
