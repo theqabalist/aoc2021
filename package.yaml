@@ -33,6 +33,7 @@ library:
   - BangPatterns
   - NamedFieldPuns
   - DeriveGeneric
+  - ScopedTypeVariables
   dependencies:
   - attoparsec
   - text

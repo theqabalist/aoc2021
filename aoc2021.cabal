@@ -39,6 +39,8 @@ library
       Days.Day13.CoordBag
       Days.Day13.Day13Input
       Days.Day13.Fold
+      Days.Day14
+      Days.Day14.Day14Input
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp
@@ -71,6 +73,7 @@ library
       BangPatterns
       NamedFieldPuns
       DeriveGeneric
+      ScopedTypeVariables
   ghc-options: -O3
   build-depends:
       attoparsec
