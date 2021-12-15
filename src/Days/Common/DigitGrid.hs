@@ -1,6 +1,8 @@
 module Days.Common.DigitGrid where
 
-import Data.Map (Map, fromList, lookup)
+import Data.Foldable (foldl')
+import Data.List (sort)
+import Data.Map (Map, empty, fromList, lookup, toList, union)
 import Data.Maybe (fromMaybe)
 import Days.Common.Parsing (DigitLines (..))
 import Prelude hiding (lookup)
@@ -34,6 +36,23 @@ adjacentValues :: (Int, Int) -> DigitGrid -> [Int]
 adjacentValues coord grid@DigitGrid {theMap} =
   fromMaybe (error $ "adjacencies to " <> show coord <> " are out of bounds of the map") $
     traverse (`lookup` theMap) $ adjacentLocations coord grid
+
+valueAt :: (Int, Int) -> DigitGrid -> Int
+valueAt p DigitGrid {theMap} = fromMaybe (error (show p <> " is not in the grid")) $ lookup p theMap
+
+join :: DigitGrid -> DigitGrid -> DigitGrid
+join (DigitGrid w1 h1 map1) (DigitGrid w2 h2 map2) = DigitGrid (max w1 w2) (max h1 h2) (union map1 map2)
+
+tileWith :: Int -> Int -> ((Int, Int, Int, Int) -> [((Int, Int), Int)] -> [((Int, Int), Int)]) -> DigitGrid -> DigitGrid
+tileWith x y modifyGrid base@(DigitGrid {width, height, theMap}) =
+  let grids = do
+        i <- [0 .. (x - 1)]
+        j <- [0 .. (y - 1)]
+        pure $ modifyGrid (i * width, j * height, i, j) (sort $ toList theMap)
+      bigGrid = foldr union empty (fromList <$> grids)
+      maxX = width * x
+      maxY = height * y
+   in DigitGrid maxX maxY bigGrid
 
 fromDigitLines :: DigitLines -> DigitGrid
 fromDigitLines (DigitLines input) =

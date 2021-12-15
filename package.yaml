@@ -43,6 +43,8 @@ library:
   - containers
   - unordered-containers
   - hashable
+  - astar
+  - psqueues
 
 executables:
   aoc2021-exe:

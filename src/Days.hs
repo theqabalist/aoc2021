@@ -3,7 +3,6 @@ module Days
   )
 where
 
--- import qualified Days.Day15 as D15
 -- import qualified Days.Day16 as D16
 -- import qualified Days.Day17 as D17
 -- import qualified Days.Day18 as D18
@@ -21,6 +20,7 @@ import qualified Days.Day11 as D11
 import qualified Days.Day12 as D12
 import qualified Days.Day13 as D13
 import qualified Days.Day14 as D14
+import qualified Days.Day15 as D15
 import qualified Days.Day2 as D2
 import qualified Days.Day3 as D3
 import qualified Days.Day4 as D4
@@ -46,8 +46,8 @@ days =
     dualTextAdapter D11.partOne D11.partTwo,
     dualTextAdapter D12.partOne D12.partTwo,
     dualTextAdapter' D13.partOne D13.partTwo,
-    dualTextAdapter' D14.partOne D14.partTwo
-    -- dualTextAdapter D15.partOne D15.partTwo,
+    dualTextAdapter' D14.partOne D14.partTwo,
+    dualTextAdapter D15.partOne D15.partTwo
     -- dualTextAdapter D16.partOne D16.partTwo,
     -- dualTextAdapter D17.partOne D17.partTwo,
     -- dualTextAdapter D18.partOne D18.partTwo,

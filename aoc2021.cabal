@@ -41,6 +41,7 @@ library
       Days.Day13.Fold
       Days.Day14
       Days.Day14.Day14Input
+      Days.Day15
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp
@@ -76,11 +77,13 @@ library
       ScopedTypeVariables
   ghc-options: -O3
   build-depends:
-      attoparsec
+      astar
+    , attoparsec
     , base >=4.7 && <5
     , containers
     , hashable
     , mtl
+    , psqueues
     , split
     , text
     , unordered-containers
