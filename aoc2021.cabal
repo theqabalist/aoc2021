@@ -42,6 +42,8 @@ library
       Days.Day14
       Days.Day14.Day14Input
       Days.Day15
+      Days.Day16
+      Days.Day16.Packet
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp
@@ -75,13 +77,17 @@ library
       NamedFieldPuns
       DeriveGeneric
       ScopedTypeVariables
-  ghc-options: -O3
+      BinaryLiterals
+  ghc-options: -O3 -Wall
   build-depends:
       astar
     , attoparsec
     , base >=4.7 && <5
+    , binary
+    , bytestring
     , containers
     , hashable
+    , lens
     , mtl
     , psqueues
     , split
@@ -102,7 +108,8 @@ executable aoc2021-exe
       TupleSections
       BangPatterns
       NamedFieldPuns
-  ghc-options: -O3 -threaded -rtsopts -with-rtsopts=-N
+      BinaryLiterals
+  ghc-options: -O3 -threaded -rtsopts -Wall -with-rtsopts=-N
   build-depends:
       aoc2021
     , base >=4.7 && <5

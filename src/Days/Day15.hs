@@ -1,13 +1,11 @@
 module Days.Day15 where
 
-import Control.Monad.State (State, evalState, execState, get, put)
 import Data.Graph.AStar
-import Data.HashSet (HashSet, fromList)
+import Data.HashSet (fromList)
 import qualified Data.Map as M
 import Data.Maybe (fromJust, fromMaybe)
 import Days.Common.DigitGrid
 import Days.Common.Parsing (DigitLines)
-import Debug.Trace
 import Prelude hiding (lookup)
 
 shortestPath :: DigitGrid -> [((Int, Int), Int)]
@@ -18,8 +16,8 @@ shortestPath grid =
         y <- [0 .. (snd goal)]
         pure ((x, y), fromList $ adjacentLocations (x, y) grid)
       adjacencyF p = fromMaybe (error (show p <> "isn't in the grid")) $ M.lookup p adjacencyLookup
-      costF p q = valueAt q grid
-      heuristicF (x, y) = (fst goal - 1) + (snd goal - y)
+      costF _ q = valueAt q grid
+      heuristicF (_, y) = (fst goal - 1) + (snd goal - y)
       goalF = (== goal)
       start = (0, 0)
       path = aStar adjacencyF costF heuristicF goalF start

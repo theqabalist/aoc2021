@@ -26,6 +26,7 @@ library:
   source-dirs: src
   ghc-options:
   - -O3
+  - -Wall
   default-extensions:
   - NoImplicitPrelude
   - OverloadedStrings
@@ -34,6 +35,7 @@ library:
   - NamedFieldPuns
   - DeriveGeneric
   - ScopedTypeVariables
+  - BinaryLiterals
   dependencies:
   - attoparsec
   - text
@@ -45,6 +47,9 @@ library:
   - hashable
   - astar
   - psqueues
+  - binary
+  - bytestring
+  - lens
 
 executables:
   aoc2021-exe:
@@ -54,6 +59,7 @@ executables:
     - -O3
     - -threaded
     - -rtsopts
+    - -Wall
     - -with-rtsopts=-N
     default-extensions:
     - NoImplicitPrelude
@@ -61,6 +67,7 @@ executables:
     - TupleSections
     - BangPatterns
     - NamedFieldPuns
+    - BinaryLiterals
     dependencies:
     - text
     - aoc2021
