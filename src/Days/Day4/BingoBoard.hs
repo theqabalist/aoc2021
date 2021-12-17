@@ -1,6 +1,3 @@
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-
 module Days.Day4.BingoBoard where
 
 import Data.Foldable (foldl')
@@ -29,14 +26,14 @@ data BingoBoard = BingoBoard
   deriving (Show)
 
 column :: Int -> BingoBoard -> [BoardLocation]
-column n (BingoBoard {byLocation}) =
+column n BingoBoard {byLocation} =
   let wholeColumn current depth n0 = case lookup (depth, n0) byLocation of
         Just v -> wholeColumn (current ++ [v]) (depth + 1) n0
         Nothing -> current
    in wholeColumn [] 0 n
 
 row :: Int -> BingoBoard -> [BoardLocation]
-row n (BingoBoard {byLocation}) =
+row n BingoBoard {byLocation} =
   let wholeRow current depth n0 = case lookup (n0, depth) byLocation of
         Just v -> wholeRow (current ++ [v]) (depth + 1) n0
         Nothing -> current
@@ -47,9 +44,9 @@ fromListsOfLists input =
   let numRows = length input
       byNumber =
         foldl'
-          ( \coll row ->
-              let numColumns = length (input !! row)
-                  added = foldl' (\coll2 column -> coll2 ++ [(input !! row !! column, (row, column))]) coll [0 .. (numColumns - 1)]
+          ( \c r ->
+              let numColumns = length (input !! r)
+                  added = foldl' (\c2 c0 -> c2 ++ [(input !! r !! c0, (r, c0))]) c [0 .. (numColumns - 1)]
                in added
           )
           []
@@ -58,7 +55,7 @@ fromListsOfLists input =
    in BingoBoard {byLocation = fromList byLocation, byNumber = fromList byNumber, bingo = False}
 
 call :: Int -> BingoBoard -> BingoBoard
-call num b@(BingoBoard {byLocation, byNumber}) = fromMaybe b $ do
+call num b@BingoBoard {byLocation, byNumber} = fromMaybe b $ do
   (r, c) <- lookup num byNumber
   let newLocations = insert (r, c) (Marked num) byLocation
   let newBoard = b {byLocation = newLocations}
@@ -68,6 +65,6 @@ instance Parseable BingoBoard where
   parse = fromListsOfLists . fmap (fmap (read . unpack) . splitOn " " . replace "  " " ") . lines
 
 finalize :: Int -> BingoBoard -> Int
-finalize call (BingoBoard {byLocation}) =
-  let unmarked = unwrap <$> (filter (\x -> not (isMarked x)) $ snd <$> toList byLocation)
-   in call * (sum unmarked)
+finalize cl BingoBoard {byLocation} =
+  let unmarked = unwrap <$> filter (not . isMarked) (snd <$> toList byLocation)
+   in cl * sum unmarked

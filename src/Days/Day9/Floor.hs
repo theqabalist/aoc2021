@@ -4,11 +4,10 @@ module Days.Day9.Floor where
 
 import Data.Foldable (foldl')
 import qualified Data.HashSet as HS
-import Data.Map (Map, fromList, lookup, toList)
+import Data.Map (lookup, toList)
 import Data.Maybe (fromMaybe)
 import Days.Common.DigitGrid (DigitGrid (..), adjacentLocations, adjacentValues)
-import Debug.Trace (traceShow, traceShowId)
-import Prelude hiding (lookup)
+import Prelude hiding (floor, lookup)
 
 type Floor = DigitGrid
 
@@ -19,7 +18,7 @@ isLow coord floor@DigitGrid {theMap} =
    in all (> asked) adjacent
 
 lowCoords :: Floor -> [(Int, Int)]
-lowCoords floor@DigitGrid {theMap} = foldl' (\acc (coord, v) -> acc ++ [coord | isLow coord floor]) [] (toList theMap)
+lowCoords floor@DigitGrid {theMap} = foldl' (\acc (coord, _) -> acc ++ [coord | isLow coord floor]) [] (toList theMap)
 
 lowValues :: Floor -> [Int]
 lowValues floor@DigitGrid {theMap} = foldl' (\acc (coord, v) -> acc ++ [v | isLow coord floor]) [] (toList theMap)
@@ -40,10 +39,10 @@ instance Ord Basin where
 traceBasin :: (Int, Int) -> Floor -> Basin
 traceBasin fromLowPoint floor = Basin $ HS.toList $ traceBasin' [fromLowPoint] (HS.fromList []) floor
   where
-    traceBasin' [] traced floor = traced
-    traceBasin' (coord : horizon) traced floor@DigitGrid {theMap} =
-      let adjacent = adjacentLocations coord floor
-          noNines = filter ((< 9) . (`valAt` floor)) adjacent
+    traceBasin' [] traced _ = traced
+    traceBasin' (coord : horizon) traced fl =
+      let adjacent = adjacentLocations coord fl
+          noNines = filter ((< 9) . (`valAt` fl)) adjacent
           withoutVisited = filter (not . (`HS.member` traced)) noNines
        in traceBasin' (horizon ++ withoutVisited) (HS.insert coord traced) floor
 

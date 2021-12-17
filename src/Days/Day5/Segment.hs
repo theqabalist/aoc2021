@@ -4,7 +4,7 @@
 module Days.Day5.Segment where
 
 import Data.Attoparsec.Text (Parser, endOfLine, skipMany1)
-import Data.HashSet (HashSet, empty, fromList, insert, intersection, singleton, size)
+import Data.HashSet (HashSet, fromList, intersection)
 import Days.Common.Parsing (int)
 import Prelude hiding (length)
 

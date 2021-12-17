@@ -16,19 +16,19 @@ type Decoding = State ([Text], Map String (HashSet Char), Map Int (HashSet Char)
 
 requiresNum :: Text -> Int -> Decoding (HashSet Char)
 requiresNum what num = do
-  (scrambled, lib, nums, mapping) <- get
+  (_, _, nums, _) <- get
   let found = lookup num nums
   pure $ fromMaybe (determinationError what num) found
 
 requiresLib :: Text -> String -> Decoding (HashSet Char)
 requiresLib what which = do
-  (scrambled, lib, nums, mapping) <- get
+  (_, lib, _, _) <- get
   let found = lookup which lib
   pure $ fromMaybe (determinationError what which) found
 
 requiresScrambled :: Text -> Char -> Decoding Char
 requiresScrambled what letter = do
-  (_, lib, nums, mapping) <- get
+  (_, _, _, mapping) <- get
   let found = scramble letter mapping
   pure $ fromMaybe (determinationError what letter) found
 

@@ -41,6 +41,7 @@ exploreGeneral filtration cave = reverse <$> explore' [Start] cave
       let cxs = HS.filter (validTransition curr) $ connections curr c
           nexts = HS.filter (filtration . (p,)) cxs
        in HS.toList nexts >>= (\next -> explore' (next : p) c)
+    explore' _ _ = undefined
 
 explore1 :: CaveSystem -> [Path]
 explore1 = exploreGeneral (not . (\(path, cave) -> elem cave path && isSmall cave))

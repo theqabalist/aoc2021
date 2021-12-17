@@ -21,7 +21,7 @@ import Data.Char (ord)
 import Data.Foldable (foldl')
 import Data.List (tails)
 import Data.List.Split (chunksOf)
-import Data.Text (Text, concat, pack, strip, unpack)
+import Data.Text (Text, concat, pack, strip)
 import Data.Text.IO (interact)
 import Data.Vector.Unboxed (Vector, freeze, fromList, length, thaw, toList, (!))
 import Data.Vector.Unboxed.Mutable (write)
@@ -83,6 +83,7 @@ zeroPad n s
 mapBin :: Int -> Char
 mapBin 0 = '0'
 mapBin 1 = '1'
+mapBin _ = undefined
 
 binWord :: Int -> Int -> String
 binWord n i = zeroPad n $ showIntAtBase 2 mapBin i ""
@@ -92,6 +93,6 @@ knotHash input =
   let instructions = join . replicate 64 . flip (++) [17, 31, 73, 47, 23] . fmap ord $ input
       jumbled = toList $ runFlips 0 0 instructions (fromList [0 .. 255])
       chunked = chunksOf 16 jumbled
-      reduced = fmap (\(head : rest) -> foldl' xor head rest) chunked
+      reduced = fmap (\(first : rest) -> foldl' xor first rest) chunked
       converted = fmap (zeroPad 2 . (`showHex` "")) reduced
    in foldl' (++) "" converted
