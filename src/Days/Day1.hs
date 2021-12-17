@@ -1,9 +1,9 @@
 module Days.Day1 (partOne, partTwo) where
 
 import Data.Foldable (foldl')
-import Data.Text (Text, lines, unpack)
+import Data.Text (lines, unpack)
 import Lib (Parseable (parse), aperture)
-import Prelude hiding (lines)
+import Prelude hiding (elem, lines)
 
 newtype Day1Input = Day1Input [Int]
 

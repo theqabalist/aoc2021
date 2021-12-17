@@ -1,9 +1,8 @@
 module Days.Day7 where
 
-import Data.HashSet (HashSet, fromList, toList)
-import Data.List.NonEmpty (NonEmpty (..))
+import Data.HashSet (fromList, toList)
 import qualified Data.List.NonEmpty as NEL
-import Data.Text (Text, splitOn, strip, unpack)
+import Data.Text (splitOn, strip, unpack)
 import Lib (Parseable (parse))
 import Prelude (Int, Rational, abs, floor, fmap, foldr, fromIntegral, min, read, sum, ($), (*), (+), (-), (.), (/))
 

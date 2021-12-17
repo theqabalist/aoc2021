@@ -1,11 +1,8 @@
 module Days.Day13 where
 
 import Data.Foldable (foldl')
-import Data.Text (Text, splitOn)
 import Days.Day13.CoordBag
 import Days.Day13.Day13Input (Day13Input (..))
-import Debug.Trace (traceShowId)
-import Lib (Parseable (parse))
 import Prelude
 
 partOne :: Day13Input -> Int

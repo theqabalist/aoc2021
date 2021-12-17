@@ -47,11 +47,19 @@ library
       Days.Day17
       Days.Day17.Probe
       Days.Day17.Target
+      Days.Day18
+      Days.Day19
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp
       Days.Day2.Movement.Interp2
       Days.Day2.Position
+      Days.Day20
+      Days.Day21
+      Days.Day22
+      Days.Day23
+      Days.Day24
+      Days.Day25
       Days.Day3
       Days.Day3.Numeric
       Days.Day3.RateCollector

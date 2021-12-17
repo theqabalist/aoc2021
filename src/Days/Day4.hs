@@ -2,7 +2,7 @@ module Days.Day4 where
 
 import Data.Foldable (find, foldl')
 import Data.List.Split (chunksOf)
-import Data.Text (Text, lines, replace, splitOn, strip, unlines, unpack)
+import Data.Text (lines, splitOn, strip, unlines, unpack)
 import Days.Day4.BingoBoard (BingoBoard, bingo, call, finalize)
 import Lib (Parseable (parse))
 import Prelude hiding (lines, unlines)
@@ -20,11 +20,11 @@ partOne :: Day4Input -> Int
 partOne (Day4Input calls boards) =
   let (foundCall, [foundBoard]) =
         foldl'
-          ( \(lastCall, boards) c ->
-              if length boards == 1
-                then (lastCall, boards)
+          ( \(lastCall, bs) c ->
+              if length bs == 1
+                then (lastCall, bs)
                 else
-                  ( let called = call c <$> boards
+                  ( let called = call c <$> bs
                      in case find bingo called of
                           Just board -> (c, [board])
                           Nothing -> (c, called)
@@ -38,11 +38,11 @@ partTwo :: Day4Input -> Int
 partTwo (Day4Input calls boards) =
   let (foundCall, [foundBoard]) =
         foldl'
-          ( \(lastCall, boards) c ->
-              if length boards == 1 && bingo (head boards)
-                then (lastCall, boards)
+          ( \(lastCall, bs) c ->
+              if length bs == 1 && bingo (head bs)
+                then (lastCall, bs)
                 else
-                  ( let called = call c <$> filter (not . bingo) boards
+                  ( let called = call c <$> filter (not . bingo) bs
                      in (c, called)
                   )
           )

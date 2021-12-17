@@ -1,9 +1,7 @@
 module Days.Day11 where
 
-import Control.Monad (join)
 import Control.Monad.Writer (execWriter, getSum, runWriter)
-import Data.Text (Text)
-import Days.Common.DigitGrid (DigitGrid (..), fromDigitLines)
+import Days.Common.DigitGrid (fromDigitLines)
 import Days.Common.Parsing (DigitLines)
 import Days.Day11.SquidGame (SquidGame (..), energize, flash, synced)
 import Prelude

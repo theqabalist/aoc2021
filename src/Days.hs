@@ -3,14 +3,14 @@ module Days
   )
 where
 
--- import qualified Days.Day18 as D18
--- import qualified Days.Day19 as D19
--- import qualified Days.Day20 as D20
--- import qualified Days.Day21 as D21
--- import qualified Days.Day22 as D22
--- import qualified Days.Day23 as D23
--- import qualified Days.Day24 as D24
--- import qualified Days.Day25 as D25
+import qualified Days.Day18 as D18
+import qualified Days.Day19 as D19
+import qualified Days.Day20 as D20
+import qualified Days.Day21 as D21
+import qualified Days.Day22 as D22
+import qualified Days.Day23 as D23
+import qualified Days.Day24 as D24
+import qualified Days.Day25 as D25
 import Data.Text (Text)
 import qualified Days.Day1 as D1
 import qualified Days.Day10 as D10
@@ -49,13 +49,13 @@ days =
     dualTextAdapter' D14.partOne D14.partTwo,
     dualTextAdapter D15.partOne D15.partTwo,
     dualTextAdapter D16.partOne D16.partTwo,
-    dualTextAdapter D17.partOne D17.partTwo
-    -- dualTextAdapter D18.partOne D18.partTwo,
-    -- dualTextAdapter' D19.partOne D19.partTwo,
-    -- dualTextAdapter D20.partOne D20.partTwo,
-    -- dualTextAdapter D21.partOne D21.partTwo,
-    -- dualTextAdapter D22.partOne D22.partTwo,
-    -- dualTextAdapter D23.partOne D23.partTwo,
-    -- dualTextAdapter D24.partOne D24.partTwo,
-    -- dualTextAdapter D25.partOne D25.partTwo
+    dualTextAdapter D17.partOne D17.partTwo,
+    dualTextAdapter D18.partOne D18.partTwo,
+    dualTextAdapter D19.partOne D19.partTwo,
+    dualTextAdapter D20.partOne D20.partTwo,
+    dualTextAdapter D21.partOne D21.partTwo,
+    dualTextAdapter D22.partOne D22.partTwo,
+    dualTextAdapter D23.partOne D23.partTwo,
+    dualTextAdapter D24.partOne D24.partTwo,
+    dualTextAdapter D25.partOne D25.partTwo
   ]

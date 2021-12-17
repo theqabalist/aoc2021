@@ -1,8 +1,7 @@
 module Days.Day6 where
 
 import Data.Map (Map, empty, insert, lookup, union)
-import Data.Text (Text, splitOn, unpack)
-import Debug.Trace (traceShowId)
+import Data.Text (splitOn, unpack)
 import Lib (Parseable (parse))
 import Prelude hiding (lookup)
 
@@ -22,23 +21,23 @@ live days (Old state) =
   let firstspawn = state + 1
       regularspawn = 7 + firstspawn
    in Lifetime ((New 8,) . (days -) <$> [firstspawn, regularspawn .. days])
-live days (New state) =
+live days (New _) =
   Lifetime (if days <= 8 then [] else (New 8,) . ((days - 9) -) <$> [0, 7 .. (days -9)])
 
 allTheWorldsChildren :: Int -> Fish -> Int
-allTheWorldsChildren days fish = snd $ allTheWorldsChildren' empty days fish
+allTheWorldsChildren days' fish' = snd $ allTheWorldsChildren' empty days' fish'
   where
     allTheWorldsChildren' :: Map Int Int -> Int -> Fish -> (Map Int Int, Int)
     allTheWorldsChildren' newCache days fish =
       foldr
-        ( \(f, life) (cache, sum) ->
+        ( \(f, life) (cache, sum') ->
             let found = lookup life cache
              in case found of
-                  Just v -> (cache, sum + v)
+                  Just v -> (cache, sum' + v)
                   Nothing ->
                     let (underCache, total) = allTheWorldsChildren' cache life f
                         updatedCache = union underCache $ insert life total cache
-                     in (updatedCache, sum + total)
+                     in (updatedCache, sum' + total)
         )
         (newCache, 1)
         (runLifetime $ live days fish)

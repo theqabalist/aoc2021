@@ -3,8 +3,7 @@ module Days.Day10 where
 import Data.List (find, foldl', sort)
 import Data.Maybe (isJust)
 import Data.Text (Text, lines, unpack)
-import Debug.Trace (traceShow)
-import Prelude (Bool (..), Char, Double, Eq ((==)), Int, String, const, error, even, filter, floor, fmap, fromIntegral, fst, head, length, maybe, mod, not, odd, reverse, snd, sum, undefined, (!!), ($), (*), (+), (.), (/), (<$>), (<=))
+import Prelude hiding (lines)
 
 points :: Char -> Int
 points ')' = 3
@@ -39,7 +38,7 @@ linePointCollector input = linePointCollector' [] (unpack input)
     linePointCollector' :: String -> String -> (String, Int)
     linePointCollector' stack (h : t) | h `inList` openingChars = linePointCollector' (h : stack) t
     linePointCollector' (s : stack) (h : t) | closes s h = linePointCollector' stack t
-    linePointCollector' (s : stack) (h : t) | not $ closes s h = (s : stack, points h)
+    linePointCollector' (s : stack) (h : _) | not $ closes s h = (s : stack, points h)
     linePointCollector' stack [] = (stack, 0)
     linePointCollector' _ _ = ([], 0)
 
@@ -58,8 +57,8 @@ midpoint [] = error "no midpoint for empty list"
 midpoint l | even (length l) = error "no midpoint length % 2"
 midpoint l
   | odd (length l) =
-    let midpoint = floor $ fromIntegral (length l) / 2.0
-     in l !! midpoint
+    let mid = floor $ (fromIntegral (length l) :: Double) / 2.0
+     in l !! mid
 midpoint (a : as) = midpoint (a : as)
 
 partTwo :: Text -> Int
@@ -67,6 +66,6 @@ partTwo input =
   let allLines = lines input
       uncorrupted = filter ((<= 0) . snd . linePointCollector) allLines
       scoreClosed :: String -> Int
-      scoreClosed closing = foldl' (\score char -> 5 * score + points2 char) 0 closing
+      scoreClosed clsing = foldl' (\score char -> 5 * score + points2 char) 0 clsing
       closings = fmap closing . fst . linePointCollector <$> uncorrupted
    in midpoint $ sort $ fmap scoreClosed closings

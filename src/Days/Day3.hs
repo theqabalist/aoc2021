@@ -1,11 +1,9 @@
 module Days.Day3 where
 
 import Data.Char (intToDigit)
-import Data.Foldable (foldl')
 import Data.Text (Text, lines, unpack)
-import Data.Vector (Vector)
 import Days.Day3.Numeric (parseInt)
-import Days.Day3.RateCollector (RateCollector, epsilon, fromSignals, gamma, leastCommon, mkCollector, mostCommon, updateWithString)
+import Days.Day3.RateCollector (epsilon, fromSignals, gamma, leastCommon, mostCommon)
 import Prelude hiding (lines)
 
 partOne :: Text -> Int

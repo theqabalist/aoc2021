@@ -2,25 +2,21 @@ module Days.Day8 where
 
 import Control.Monad.State (evalState)
 import qualified Data.HashSet as HS
-import Data.List (find, partition)
 import qualified Data.Map as M
-import Data.Maybe (fromMaybe)
 import Data.Text (Text, length, lines, splitOn, unpack)
 import Days.Day8.CharMapping
   ( CharMapping,
     descramble,
     mkMapping,
-    scramble,
-    update,
   )
 import Days.Day8.Decode
-import Debug.Trace (traceShow, traceShowId)
 import Lib (Parseable (parse))
 import Prelude hiding (length, lines)
 import qualified Prelude as P
 
 toTupleUnsafe :: [a] -> (a, a)
 toTupleUnsafe [a, b] = (a, b)
+toTupleUnsafe _ = undefined
 
 newtype Day8Input = Day8Input [([Text], [Text])]
 

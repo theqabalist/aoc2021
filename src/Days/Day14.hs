@@ -1,13 +1,11 @@
 module Days.Day14 where
 
-import Control.Monad.State (State, evalState, execState, get, put)
+import Control.Monad.State (State, evalState, get, put)
 import Data.Foldable (foldl')
-import Data.Map (Map, adjust, empty, findWithDefault, fromList, insert, lookup, singleton, toList, unionWith)
+import Data.Map (Map, adjust, empty, findWithDefault, insert, lookup, singleton, toList, unionWith)
 import Data.Maybe (fromMaybe)
-import Data.Text (Text)
-import Days.Day14.Day14Input
-import Debug.Trace
-import Prelude hiding (lookup)
+import Days.Day14.Day14Input (Day14Input (..))
+import Prelude hiding (lookup, maximum, minimum, rem)
 
 frequency :: forall a. Ord a => [a] -> Map a Int
 frequency =
@@ -29,7 +27,7 @@ freqMinMax m = minmax' (toList m)
     minmax' [] = error "cannot minmax an empty map"
 
 countDescend :: Map String Char -> Int -> String -> State (Map (String, Int) (Map Char Int)) (Map Char Int)
-countDescend mapping depth input | depth == 0 = do
+countDescend _ depth input | depth == 0 = do
   cache <- get
   let updated = fromMaybe (frequency input) $ lookup (input, depth) cache
   put (insert (input, depth) updated cache)

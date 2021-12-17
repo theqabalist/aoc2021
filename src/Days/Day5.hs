@@ -3,8 +3,7 @@ module Days.Day5 where
 import Data.Attoparsec.Text (endOfInput, many', parseOnly)
 import Data.Either (fromRight)
 import Data.HashSet (HashSet, empty, size, union, unions)
-import Data.Text (Text)
-import Days.Day5.Segment (Segment, collide, diagonal, horizontal, intersects, parseSegment, vertical)
+import Days.Day5.Segment (Segment, collide, diagonal, intersects, parseSegment)
 import Lib (Parseable (parse))
 import Prelude (Int, Show, filter, map, not, ($), (.), (<*))
 
