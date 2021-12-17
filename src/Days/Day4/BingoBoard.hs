@@ -4,12 +4,11 @@
 module Days.Day4.BingoBoard where
 
 import Data.Foldable (foldl')
-import Data.Map (Map, fromList, toList, lookup, insert)
-import Data.Text (lines, splitOn, strip, unpack, replace)
-import Data.Tuple (swap)
+import Data.Map (Map, fromList, insert, lookup, toList)
+import Data.Maybe (fromMaybe)
+import Data.Text (lines, replace, splitOn, unpack)
 import Lib (Parseable (parse))
 import Prelude hiding (lines, lookup)
-import Data.Maybe (fromMaybe)
 
 data BoardLocation = Marked Int | Unmarked Int
   deriving (Show, Eq, Ord)
@@ -31,15 +30,15 @@ data BingoBoard = BingoBoard
 
 column :: Int -> BingoBoard -> [BoardLocation]
 column n (BingoBoard {byLocation}) =
-  let wholeColumn current depth n = case lookup (depth, n) byLocation of
-        Just v -> wholeColumn (current ++ [v]) (depth + 1) n
+  let wholeColumn current depth n0 = case lookup (depth, n0) byLocation of
+        Just v -> wholeColumn (current ++ [v]) (depth + 1) n0
         Nothing -> current
    in wholeColumn [] 0 n
 
 row :: Int -> BingoBoard -> [BoardLocation]
 row n (BingoBoard {byLocation}) =
-  let wholeRow current depth n = case lookup (n, depth) byLocation of
-        Just v -> wholeRow (current ++ [v]) (depth + 1) n
+  let wholeRow current depth n0 = case lookup (n0, depth) byLocation of
+        Just v -> wholeRow (current ++ [v]) (depth + 1) n0
         Nothing -> current
    in wholeRow [] 0 n
 
@@ -60,15 +59,15 @@ fromListsOfLists input =
 
 call :: Int -> BingoBoard -> BingoBoard
 call num b@(BingoBoard {byLocation, byNumber}) = fromMaybe b $ do
-    (r, c) <- lookup num byNumber
-    let newLocations = insert (r, c) (Marked num) byLocation
-    let newBoard = b {byLocation = newLocations}
-    pure (newBoard {bingo = all isMarked (column c newBoard) || all isMarked (row r newBoard)})
+  (r, c) <- lookup num byNumber
+  let newLocations = insert (r, c) (Marked num) byLocation
+  let newBoard = b {byLocation = newLocations}
+  pure (newBoard {bingo = all isMarked (column c newBoard) || all isMarked (row r newBoard)})
 
 instance Parseable BingoBoard where
   parse = fromListsOfLists . fmap (fmap (read . unpack) . splitOn " " . replace "  " " ") . lines
 
 finalize :: Int -> BingoBoard -> Int
-finalize call (BingoBoard {byLocation}) = let
-    unmarked = unwrap <$> (filter (\x -> not (isMarked x)) $ snd <$> toList byLocation)
-    in call * (sum unmarked)
+finalize call (BingoBoard {byLocation}) =
+  let unmarked = unwrap <$> (filter (\x -> not (isMarked x)) $ snd <$> toList byLocation)
+   in call * (sum unmarked)

@@ -3,9 +3,9 @@ module Days.Day13.Day13Input where
 import Control.Applicative (many, (<|>))
 import Data.Attoparsec.Text (Parser, endOfInput, endOfLine, parseOnly, string)
 import Data.Either (fromRight)
-import Data.HashSet (HashSet, fromList)
+import Data.HashSet (fromList)
 import Days.Common.Parsing (int)
-import Days.Day13.CoordBag (CoordBag(..))
+import Days.Day13.CoordBag (CoordBag (..))
 import Days.Day13.Fold
 import Lib (Parseable (parse))
 import Prelude hiding (Left)

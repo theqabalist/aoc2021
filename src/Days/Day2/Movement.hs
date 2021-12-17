@@ -2,20 +2,17 @@
 
 module Days.Day2.Movement where
 
-import Control.Applicative (many, some, (<|>))
-import Control.Monad.Except (Except, runExcept, throwError)
-import Data.Attoparsec.Text (Parser, Result, decimal, digit, endOfInput, endOfLine, parseOnly, skip, skipMany1, space, string)
+import Control.Applicative (some, (<|>))
+import Data.Attoparsec.Text (Parser, endOfInput, endOfLine, parseOnly, skip, string)
 import Data.Char (isSpace)
-import Data.Either (fromRight)
-import Data.Text (Text, pack)
+import Data.Text (Text)
 import Days.Common.Parsing (int)
-import Days.Day2.Position (Position (Position), x, z)
 import Prelude (Either, Int, String, (*>), (<$>), (<*))
 
 data Movement = Forward Int | Up Int | Down Int | Stay
 
 intInstruction :: Text -> Parser Int
-intInstruction instruction = string instruction *> skip isSpace *> int <* endOfLine
+intInstruction ins = string ins *> skip isSpace *> int <* endOfLine
 
 parseForward :: Parser Movement
 parseForward = Forward <$> intInstruction "forward"

@@ -1,9 +1,8 @@
 module Days.Day14.Day14Input where
 
-import Data.Attoparsec.Text (Parser, endOfInput, endOfLine, letter, many1, parseOnly, string)
+import Data.Attoparsec.Text (Parser, endOfLine, letter, many1, parseOnly, string)
 import Data.Either (fromRight)
 import Data.Map (Map, fromList)
-import Data.Text (Text)
 import Lib (Parseable (parse))
 import Prelude
 

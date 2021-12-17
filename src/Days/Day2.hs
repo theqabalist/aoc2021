@@ -1,14 +1,11 @@
 module Days.Day2 where
 
-import Control.Monad.Except (runExcept)
 import Data.Either (fromRight)
 import Data.Foldable (foldl')
-import Data.Text (Text)
 import Days.Day2.Movement
 import qualified Days.Day2.Movement.Interp as I
 import qualified Days.Day2.Movement.Interp2 as I2
 import Days.Day2.Position
-import Debug.Trace (traceShow)
 import Lib (Parseable (parse))
 import Prelude (Int, fmap, ($), (.))
 

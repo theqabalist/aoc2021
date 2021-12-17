@@ -44,6 +44,9 @@ library
       Days.Day15
       Days.Day16
       Days.Day16.Packet
+      Days.Day17
+      Days.Day17.Probe
+      Days.Day17.Target
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp

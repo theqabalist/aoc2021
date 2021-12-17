@@ -1,6 +1,5 @@
 module Days.Common.DigitGrid where
 
-import Data.Foldable (foldl')
 import Data.List (sort)
 import Data.Map (Map, empty, fromList, lookup, toList, union)
 import Data.Maybe (fromMaybe)
@@ -15,9 +14,9 @@ data DigitGrid = DigitGrid
   deriving (Show, Eq)
 
 inbounds :: (Int, Int) -> DigitGrid -> Bool
-inbounds (x, y) f | x < 0 || y < 0 = False
-inbounds (x, y) DigitGrid {width} | x >= width = False
-inbounds (x, y) DigitGrid {height} | y >= height = False
+inbounds (x, y) _ | x < 0 || y < 0 = False
+inbounds (x, _) DigitGrid {width} | x >= width = False
+inbounds (_, y) DigitGrid {height} | y >= height = False
 inbounds _ _ = True
 
 -- without diagonals
@@ -41,10 +40,10 @@ valueAt :: (Int, Int) -> DigitGrid -> Int
 valueAt p DigitGrid {theMap} = fromMaybe (error (show p <> " is not in the grid")) $ lookup p theMap
 
 join :: DigitGrid -> DigitGrid -> DigitGrid
-join (DigitGrid w1 h1 map1) (DigitGrid w2 h2 map2) = DigitGrid (max w1 w2) (max h1 h2) (union map1 map2)
+join (DigitGrid w1 h1 map1) (DigitGrid w2 h2 map2) = DigitGrid (max w1 w2) (max h1 h2) (map1 `union` map2)
 
 tileWith :: Int -> Int -> ((Int, Int, Int, Int) -> [((Int, Int), Int)] -> [((Int, Int), Int)]) -> DigitGrid -> DigitGrid
-tileWith x y modifyGrid base@(DigitGrid {width, height, theMap}) =
+tileWith x y modifyGrid DigitGrid {width, height, theMap} =
   let grids = do
         i <- [0 .. (x - 1)]
         j <- [0 .. (y - 1)]

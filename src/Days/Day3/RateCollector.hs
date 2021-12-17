@@ -2,11 +2,9 @@
 
 module Days.Day3.RateCollector where
 
-import Data.Vector (Vector, fromList, replicate, zipWith, head, (!))
-import Debug.Trace (traceShow)
-import Numeric (readInt)
-import Prelude hiding (replicate, zipWith, head)
+import Data.Vector (Vector, fromList, replicate, zipWith, (!))
 import Days.Day3.Numeric (baseLifter)
+import Prelude hiding (head, replicate, zipWith)
 import qualified Prelude as P
 
 data Signal = Signal
@@ -51,13 +49,11 @@ fromSignals signals =
    in foldr updateWithString collector signals
 
 mostCommon :: Int -> Int -> RateCollector -> Int
-mostCommon ifEqual pos (RateCollector coll) = let
-  next = coll ! pos
-  in
-    if equal next then ifEqual else greater next
+mostCommon ifEqual pos (RateCollector coll) =
+  let next = coll ! pos
+   in if equal next then ifEqual else greater next
 
 leastCommon :: Int -> Int -> RateCollector -> Int
-leastCommon ifEqual pos (RateCollector coll) = let
-  next = coll ! pos
-  in
-    if equal next then ifEqual else lesser next
+leastCommon ifEqual pos (RateCollector coll) =
+  let next = coll ! pos
+   in if equal next then ifEqual else lesser next

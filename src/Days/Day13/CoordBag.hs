@@ -4,7 +4,6 @@ import Data.Foldable (foldl')
 import Data.HashSet (HashSet, filter, fromList, map, member, size, toList, union)
 import Data.Text (Text, pack, unlines)
 import Days.Day13.Fold
-import Debug.Trace (traceShowId)
 import Prelude hiding (Left, filter, map, unlines)
 
 newtype CoordBag = CoordBag (HashSet (Int, Int))
@@ -12,10 +11,10 @@ newtype CoordBag = CoordBag (HashSet (Int, Int))
 
 fold :: Fold -> CoordBag -> CoordBag
 fold (Up u) (CoordBag bag) =
-  let (lowerSection, upperSection) = (filter (\(x, y) -> y <= u) bag, filter (\(x, y) -> y > u) bag)
+  let (lowerSection, upperSection) = (filter (\(_, y) -> y <= u) bag, filter (\(_, y) -> y > u) bag)
    in CoordBag $ lowerSection `union` map (\(x, y) -> (x, u - (y - u))) upperSection
 fold (Left l) (CoordBag bag) =
-  let (leftSection, rightSection) = (filter (\(x, y) -> x <= l) bag, filter (\(x, y) -> x > l) bag)
+  let (leftSection, rightSection) = (filter (\(x, _) -> x <= l) bag, filter (\(x, _) -> x > l) bag)
    in CoordBag $ leftSection `union` map (\(x, y) -> (l - (x - l), y)) rightSection
 
 visibleDots :: CoordBag -> Int
