@@ -48,6 +48,7 @@ library
       Days.Day17.Probe
       Days.Day17.Target
       Days.Day18
+      Days.Day18.SFPair
       Days.Day19
       Days.Day2
       Days.Day2.Movement
