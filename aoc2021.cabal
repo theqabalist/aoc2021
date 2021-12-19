@@ -50,6 +50,8 @@ library
       Days.Day18
       Days.Day18.SFPair
       Days.Day19
+      Days.Day19.Scanner
+      Days.Day19.Vec3
       Days.Day2
       Days.Day2.Movement
       Days.Day2.Movement.Interp
