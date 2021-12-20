@@ -2,7 +2,7 @@ module Days.Day3 where
 
 import Data.Char (intToDigit)
 import Data.Text (Text, lines, unpack)
-import Days.Day3.Numeric (parseInt)
+import Days.Common.Numeric (parseInt)
 import Days.Day3.RateCollector (epsilon, fromSignals, gamma, leastCommon, mostCommon)
 import Prelude hiding (lines)
 

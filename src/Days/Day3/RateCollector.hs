@@ -3,7 +3,7 @@
 module Days.Day3.RateCollector where
 
 import Data.Vector (Vector, fromList, replicate, zipWith, (!))
-import Days.Day3.Numeric (baseLifter)
+import Days.Common.Numeric (baseLifter)
 import Prelude hiding (head, replicate, zipWith)
 import qualified Prelude as P
 

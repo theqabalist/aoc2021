@@ -27,6 +27,8 @@ library
   exposed-modules:
       Days
       Days.Common.DigitGrid
+      Days.Common.FlexGrid
+      Days.Common.Numeric
       Days.Common.Parsing
       Days.Day1
       Days.Day10
@@ -58,13 +60,14 @@ library
       Days.Day2.Movement.Interp2
       Days.Day2.Position
       Days.Day20
+      Days.Day20.Bit
+      Days.Day20.Bit.Parsing
       Days.Day21
       Days.Day22
       Days.Day23
       Days.Day24
       Days.Day25
       Days.Day3
-      Days.Day3.Numeric
       Days.Day3.RateCollector
       Days.Day4
       Days.Day4.BingoBoard

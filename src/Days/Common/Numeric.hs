@@ -1,4 +1,4 @@
-module Days.Day3.Numeric where
+module Days.Common.Numeric where
 
 import Data.Char (digitToInt)
 import Data.Vector (Vector, fromList, zipWith)

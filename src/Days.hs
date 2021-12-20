@@ -3,14 +3,6 @@ module Days
   )
 where
 
-import qualified Days.Day18 as D18
-import qualified Days.Day19 as D19
-import qualified Days.Day20 as D20
-import qualified Days.Day21 as D21
-import qualified Days.Day22 as D22
-import qualified Days.Day23 as D23
-import qualified Days.Day24 as D24
-import qualified Days.Day25 as D25
 import Data.Text (Text)
 import qualified Days.Day1 as D1
 import qualified Days.Day10 as D10
@@ -21,7 +13,15 @@ import qualified Days.Day14 as D14
 import qualified Days.Day15 as D15
 import qualified Days.Day16 as D16
 import qualified Days.Day17 as D17
+import qualified Days.Day18 as D18
+import qualified Days.Day19 as D19
 import qualified Days.Day2 as D2
+import qualified Days.Day20 as D20
+import qualified Days.Day21 as D21
+import qualified Days.Day22 as D22
+import qualified Days.Day23 as D23
+import qualified Days.Day24 as D24
+import qualified Days.Day25 as D25
 import qualified Days.Day3 as D3
 import qualified Days.Day4 as D4
 import qualified Days.Day5 as D5
@@ -52,7 +52,7 @@ days =
     dualTextAdapter D17.partOne D17.partTwo,
     dualTextAdapter D18.partOne D18.partTwo,
     dualTextAdapter' D19.partOne D19.partTwo,
-    dualTextAdapter D20.partOne D20.partTwo,
+    dualTextAdapter' D20.partOne D20.partTwo,
     dualTextAdapter D21.partOne D21.partTwo,
     dualTextAdapter D22.partOne D22.partTwo,
     dualTextAdapter D23.partOne D23.partTwo,
