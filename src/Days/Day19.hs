@@ -7,8 +7,8 @@ import Data.Foldable (Foldable (toList))
 import Data.HashSet (HashSet, difference, empty, fromList, size, union)
 import Data.List (find)
 import Data.Maybe (fromJust, isJust)
+import qualified Days.Common.Vec3 as V3
 import Days.Day19.Scanner
-import qualified Days.Day19.Vec3 as V3
 import Debug.Trace
 import Lib (Parseable (parse))
 import Prelude

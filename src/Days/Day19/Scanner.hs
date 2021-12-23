@@ -3,7 +3,7 @@ module Days.Day19.Scanner where
 import Control.Applicative
 import Data.Attoparsec.Text (Parser, decimal, endOfLine, string)
 import Data.Hashable (Hashable)
-import qualified Days.Day19.Vec3 as V3
+import qualified Days.Common.Vec3 as V3
 import GHC.Generics (Generic)
 import Prelude
 

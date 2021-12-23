@@ -3,7 +3,6 @@ module Days.Common.FlexGrid where
 import Data.Map (Map, delete, fromList, lookup, toList, union)
 import Data.Maybe (fromMaybe)
 import Days.Common.Parsing (FlexLines (..))
-import Debug.Trace
 import Prelude hiding (lookup)
 
 data FlexGrid a = FlexGrid
@@ -46,7 +45,7 @@ valueAt' p FlexGrid {theMap} = fromMaybe mempty $ lookup p theMap
 
 convolute' :: forall a. (Show a, Monoid a) => (Int, Int) -> ([a] -> a) -> FlexGrid a -> FlexGrid a
 convolute' (kernelX, kernelY) _ _ | even kernelX || even kernelY = error "incorrect kernel specified, must be odd dimensions"
-convolute' (kernelX, kernelY) tx g@(FlexGrid {theMap}) =
+convolute' (kernelX, kernelY) tx g@FlexGrid {theMap} =
   let xrange x =
         let split = floor $ ((fromIntegral kernelX :: Double) - 1) / 2
          in [x - split .. x + split]
@@ -56,13 +55,13 @@ convolute' (kernelX, kernelY) tx g@(FlexGrid {theMap}) =
       neighborhood (x, y) = do
         y0 <- yrange y
         x0 <- xrange x
-        pure $ valueAt' ((x0, y0)) g
+        pure $ valueAt' (x0, y0) g
       convoluted = fromList $ (\(k, _) -> (k, tx (neighborhood k))) <$> toList theMap
    in g {theMap = convoluted}
 
 convolute1 :: forall a. (Monoid a) => Int -> (Int, Int) -> ([a] -> a) -> (Int, Int) -> FlexGrid a -> a
 convolute1 _ (kernelX, kernelY) _ _ _ | even kernelX || even kernelY = error "incorrect kernel specified, must be odd dimensions"
-convolute1 depth k@(kernelX, kernelY) tx coord g@(FlexGrid {theMap}) =
+convolute1 depth k@(kernelX, kernelY) tx coord g =
   let xrange x =
         let split = floor $ ((fromIntegral kernelX :: Double) - 1) / 2
          in [x - split .. x + split]
@@ -105,7 +104,7 @@ depad (FlexGrid minX minY w h theMap) =
       bottom = (,minY + (h - 1)) <$> [minX .. minX + (w - 1)]
       left = (minX,) <$> [minY .. minY + (h - 1)]
       removed = foldr delete theMap (top ++ right ++ bottom ++ left)
-   in (FlexGrid newMinX newMinY newWidth newHeight removed)
+   in FlexGrid newMinX newMinY newWidth newHeight removed
 
 padRing' :: forall a. (Monoid a, Show a) => FlexGrid a -> FlexGrid a
 padRing' = padRing (const mempty)
@@ -121,4 +120,4 @@ fromLines (FlexLines input) =
    in FlexGrid 0 0 width height theMap
 
 count :: forall a. Eq a => a -> FlexGrid a -> Int
-count v (FlexGrid {theMap}) = length . filter (== v) . fmap snd . toList $ theMap
+count v FlexGrid {theMap} = length . filter (== v) . fmap snd . toList $ theMap

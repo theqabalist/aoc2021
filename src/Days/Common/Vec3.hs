@@ -1,9 +1,7 @@
-module Days.Day19.Vec3 where
+module Days.Common.Vec3 where
 
-import Control.Applicative
-import Control.Monad (join)
 import Data.Attoparsec.Text (Parser, decimal, signed, string)
-import Data.Hashable (Hashable (hash))
+import Data.Hashable (Hashable)
 import GHC.Generics (Generic)
 import Prelude
 
@@ -26,6 +24,9 @@ permN 3 (Vec3 (x, y, z)) = Vec3 (y, z, x)
 permN 4 (Vec3 (x, y, z)) = Vec3 (z, x, y)
 permN 5 (Vec3 (x, y, z)) = Vec3 (z, y, x)
 permN n v = permN (n `mod` 6) v
+
+toList :: Vec3 -> [Int]
+toList (Vec3 (x, y, z)) = [x, y, z]
 
 vec3 :: Parser Vec3
 vec3 = Vec3 <$> ((,,) <$> (signed decimal <* string ",") <*> (signed decimal <* string ",") <*> signed decimal)

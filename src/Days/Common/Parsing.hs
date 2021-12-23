@@ -3,7 +3,7 @@ module Days.Common.Parsing where
 import Control.Applicative (some)
 import Data.Attoparsec.Text (Parser, digit)
 import Data.Char (digitToInt)
-import Data.Text (lines, map, singleton, unpack)
+import Data.Text (lines, singleton, unpack)
 import Lib (Parseable (parse))
 import Prelude (Int, Show, fmap, read, (.), (<$>))
 
