@@ -49,6 +49,7 @@ library:
   - psqueues
   - binary
   - bytestring
+  - search-algorithms
 
 executables:
   aoc2021-exe:
@@ -60,7 +61,6 @@ executables:
     - -rtsopts
     - -Wall
     - -with-rtsopts=-N
-    - -dynamic
     default-extensions:
     - NoImplicitPrelude
     - OverloadedStrings
@@ -74,5 +74,18 @@ executables:
 
 tests:
   spec:
+    ghc-options:
+    - -O3
+    - -Wall
     defaults: hspec/hspec@master
-    dependencies: aoc2021
+    default-extensions:
+    - NoImplicitPrelude
+    - OverloadedStrings
+    - TupleSections
+    - BangPatterns
+    - NamedFieldPuns
+    - BinaryLiterals
+    dependencies: 
+    - aoc2021
+    - containers
+    - unordered-containers

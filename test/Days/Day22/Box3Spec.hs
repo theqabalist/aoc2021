@@ -3,6 +3,7 @@ module Days.Day22.Box3Spec where
 import Days.Common.Vec3
 import Days.Day22.Box3
 import Test.Hspec
+import Prelude
 
 spec = do
   describe "volume" $ do

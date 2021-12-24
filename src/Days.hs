@@ -55,7 +55,7 @@ days =
     dualTextAdapter' D20.partOne D20.partTwo,
     dualTextAdapter D21.partOne D21.partTwo,
     dualTextAdapter' D22.partOne D22.partTwo,
-    dualTextAdapter D23.partOne D23.partTwo,
+    dualTextAdapter' D23.partOne D23.partTwo,
     dualTextAdapter D24.partOne D24.partTwo,
     dualTextAdapter D25.partOne D25.partTwo
   ]

@@ -28,6 +28,7 @@ library
       Days
       Days.Common.DigitGrid
       Days.Common.FlexGrid
+      Days.Common.Func
       Days.Common.Numeric
       Days.Common.Parsing
       Days.Common.Vec3
@@ -109,6 +110,7 @@ library
     , hashable
     , mtl
     , psqueues
+    , search-algorithms
     , split
     , text
     , unordered-containers
@@ -128,7 +130,7 @@ executable aoc2021-exe
       BangPatterns
       NamedFieldPuns
       BinaryLiterals
-  ghc-options: -O3 -threaded -rtsopts -Wall -with-rtsopts=-N -dynamic
+  ghc-options: -O3 -threaded -rtsopts -Wall -with-rtsopts=-N
   build-depends:
       aoc2021
     , base >=4.7 && <5
@@ -144,9 +146,19 @@ test-suite spec
       Paths_aoc2021
   hs-source-dirs:
       test
+  default-extensions:
+      NoImplicitPrelude
+      OverloadedStrings
+      TupleSections
+      BangPatterns
+      NamedFieldPuns
+      BinaryLiterals
+  ghc-options: -O3 -Wall
   build-depends:
       aoc2021
     , base >=4.7 && <5
+    , containers
     , hspec ==2.*
+    , unordered-containers
   default-language: Haskell2010
   build-tool-depends: hspec-discover:hspec-discover == 2.*
