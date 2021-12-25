@@ -6,10 +6,10 @@ import Data.Text (Text)
 import Prelude
 
 partOne :: Text -> Maybe (Cost, [Zustand])
-partOne x = solve ["BC", "CD", "AD", "BA"]
+partOne _ = solve ["BC", "CD", "AD", "BA"]
 
 partTwo :: Text -> Maybe (Cost, [Zustand])
-partTwo x = solve ["BDDC", "CCBD", "ABAD", "BACA"]
+partTwo _ = solve ["BDDC", "CCBD", "ABAD", "BACA"]
 
 {-
 #01#2#3#4#56#
